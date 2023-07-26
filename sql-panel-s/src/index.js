@@ -15,16 +15,7 @@ export default {
 				interface: 'input-multiline',
 				width: 'full',
 			},
-		},
-		{
-			field: 'columnWidth',
-			name: 'Coma separated list of column widths',
-			type: 'string',
-			meta: {
-				interface: 'input',
-				width: 'full',
-			},
-		},
+		}
 	],
 	minWidth: 12,
 	minHeight: 8,
