@@ -22,11 +22,7 @@ export default {
 		showHeader: {
 			type: Boolean,
 			default: false,
-		},
-		columnWidth: {
-			type: String,
-			default: "",
-		},
+		}
 	},
 	data() {
 		return {
@@ -48,11 +44,9 @@ export default {
 			const api = useApi();
 			const { data } = await api(`sql-panel-api/${this.id}`);
 			this.loading = false;
-			let columnWidth = this.columnWidth.split(",").map(parseFloat);
-			this.headers = data.headers.map((header, i) => ({
+			this.headers = data.headers.map((header) => ({
 				text: header.text,
 				value: header.value,
-				width: columnWidth[i],
 			}));
 			this.items = data.items;
 		},
@@ -64,6 +58,7 @@ export default {
 		},
 		onSortUpdate(sortEvent) {
 			if (sortEvent !== null) {
+				this.loading = true;
 				this.items.sort((a, b) => {
 					const valueA = a[sortEvent.by];
 					const valueB = b[sortEvent.by];
@@ -76,6 +71,7 @@ export default {
 					// For numerical values, use normal comparison
 					return sortEvent.desc ? valueB - valueA : valueA - valueB;
 				});
+				this.loading = false;
 			}
 		},
 	},
