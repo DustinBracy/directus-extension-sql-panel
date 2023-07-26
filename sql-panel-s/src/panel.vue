@@ -1,7 +1,7 @@
 <template>
 	<div class="sql-panel-container" :class="{ 'has-header': showHeader }">
 		<v-table class="table" :showResize="true" v-model:headers="headers" :items="items" :loading="loading"
-			@update:sort="onSortUpdate" v-model:sort>
+			@update:sort="onSortUpdate" v-model:sort="sortConfig">
 			<template v-for="(header, rowIndex) in headers" v-slot:[`item.${header.value}`]="{ item }">
 				<div :key="rowIndex + 'link'" v-if="shouldRenderLink(item[header.value])"
 					@click="openLink(item[header.value])" class="custom-link">
@@ -63,7 +63,6 @@ export default {
 			window.open(link, "_blank");
 		},
 		onSortUpdate(sortEvent) {
-			console.log(sortEvent)
 			if (sortEvent !== null) {
 				this.items.sort((a, b) => {
 					const valueA = a[sortEvent.by];
