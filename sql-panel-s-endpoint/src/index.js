@@ -11,7 +11,7 @@ const endpointHandler = function (
 
       // Fetch the panel options from the 'directus_panels' table using the provided ID
       const panelQueryResult = await database.raw(
-        `SELECT options FROM directus_panels WHERE id = '${panelId}'`
+        `SELECT options FROM directus_panels WHERE id = '${[panelId]}'`
       );
 
       // Parse the options JSON data into an object
